@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **没有 build / lint / test 命令**——产物是 markdown 资产本身
 - 唯一代码：[六件套管线手册.md](skills/knowledge-capture/references/六件套管线手册.md) §6 内嵌的 `agent_reconcile.py`（分派对账脚本：expect 绝对路径化 + mtime 回炉防护，纯标准库；供目标项目提取使用）
-- git 仓库（main）；资产域 18 个 UTF-8 中文 markdown + `results/`（战役报告层）
+- git 仓库（main）；资产域 18 个 UTF-8 中文 markdown；战役报告等工作产物落盘 `results/`（已 gitignore，不入库）
 - 版本标记 v1.0：七份 agent 头部 `> 版本 v1.0` 单行；四个 SKILL.md 头部引用块 + 尾部元信息「适用版本」
 
 ## 架构大图景（需跨文件理解的部分）
@@ -41,7 +41,7 @@ agent frontmatter 的 `model: sonnet|opus` 是轻/重档建议：判断密集环
 
 ## 本仓库的标准工作法（两轮自审战役实证）
 
-1. 审查/改写任务：**并行派发多实例各独占一域**（文件域互不重叠防编辑冲突），详情落盘 `results/exec-detail-<战役名>/`，回执极简三行；对账用 expect 产物存在性（可布防文件监控）
+1. 审查/改写任务：**并行派发多实例各独占一域**（文件域互不重叠防编辑冲突），详情落盘 `results/exec-detail-<战役名>/`（gitignore 不入库），回执极简三行；对账用 expect 产物存在性（可布防文件监控）
 2. 编排器汇总分级路由：P0（阻塞）/P1（直接修）/P2（修后记录）/P3（呈报用户决策，不擅动）
 3. 修复后**必须派 code-validator 终验**（逐条对照修复清单 vs 磁盘实测，不采信实施自述）
 4. 会话中文件可能被外部修改——编辑前重读目标区域；old_string 不匹配时以磁盘现文为准重新锚定，不回滚外部变更
@@ -57,11 +57,11 @@ agent frontmatter 的 `model: sonnet|opus` 是轻/重档建议：判断密集环
 6. **adversarial-reviewer 随包分发是设计决策**：管线③直接引用它，不随包则接入后首次派发即断链；目标项目或用户全局已有同名 agent 时优先既有版，按判例 10「补丁节合并」接入（不整文件覆盖）
 7. **克制清单（不可违反）**：不引入外部框架（无 LangChain/LangMem 依赖）、不建向量知识库（markdown + grep + 索引优于 RAG）、不做全自动采纳（人工门禁是安全机制）、新增 agent 角色必须有调用痕迹预期
 8. 新增/修改 skill 必须遵循 knowledge-capture [SKILL.md](skills/knowledge-capture/SKILL.md) 的三级渐进披露规范（L1 description 窄触发、L2 正文行数上限、L3 references/ 带 README 登记表）
-9. **`results/` 只增不改**：战役报告是 episodic 证据层（体系 provenance 源），其中出现的缺陷原文（含历史指涉）属工作记录，不回改
+9. **战役报告不入库**：工作产物（审查/验证/改写报告）落盘 `results/` 且被 gitignore——仓库保持纯资产集；关键结论须在收官呈报中提炼进资产或呈报文本后才算沉淀完成（不留"报告落盘即结束"的断点）
 
 ## 改完资产后的自查
 
 - **引用实存**：改动涉及 agent/skill/文件名时，Grep 全库确认无断链（review-patterns 的知识漂移核查——重构合并角色后必须跑一轮退役实体名扫描）
 - **占位符清点**：`{{` 只应出现在 [domain-guard.md](agents/domain-guard.md)、[CLAUDE.md集成段.md](skills/knowledge-capture/references/CLAUDE.md集成段.md) 与 README.md 的接入说明中（索引与路由模板的数值占位用 `<...>` 尖括号）
 - **数值一致性**：全库 Grep 具体数字（行数上限/阈值），确认只在三类权威源出现
-- **残留扫描**：`FAS|源体系|转化自|v1\.1` 于资产域应零命中（results/ 除外）
+- **残留扫描**：`FAS|源体系|转化自|v1\.1` 于全仓库应零命中
