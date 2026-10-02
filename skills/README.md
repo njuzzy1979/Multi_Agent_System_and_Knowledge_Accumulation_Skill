@@ -12,6 +12,9 @@
 | methodology/review-patterns/ | 方案评审前预判 / rc=0 但真干活了吗 / 两份文档说的不一样 / 实施报告自述与实际不符 | 审查 | active | 2026-10-02 | 五类缺陷模式核查 + 审查五法 | 本库原生 |
 | methodology/design-lessons/ | 方案选型论证 / 为什么不用 X / 回滚方案设计 / 人机边界划分 | 设计 | active | 2026-10-02 | 八设计教训 + 原子写红线 + 门禁自举检查 | 本库原生 |
 | methodology/chain-audit/ | 这个功能涉及哪些文件 / Grep 零命中之谜 / 疑似旧缓存 / 改造前评估复用面 | 侦查 | active | 2026-10-02 | 链路测绘 SOP + 登记簿模式 + 预设修正节 | 本库原生 |
+| asset-maintenance-defects/ | 两份文档数值说法不一 / 对账说完成但东西是旧的 / 重构后引用找不到定义 / 注记没人回填 | 修复 | active | 2026-10-02 | 资产库维护五类缺陷模式与命令级处置 | 两轮自审战役（git: b11c937 起） |
+| multi-agent-campaign-sop/ | 全面审查并修复 / 全面优化 / 并行派几个 agent 查 / 重型任务编排 | 修复 | active | 2026-10-02 | 多 agent 战役编排 SOP（分域/对账/分级/终验/收官） | 三次战役收官呈报 |
+| blind-retry-rework/ | FAIL 了再试一次 / 回炉重做 / 重派任务 / 设计重试机制 | 审查 | active | 2026-10-02 | 盲重试反模式：回炉载荷必带阻塞级发现 | 外部实证（Reflexion）+本库拦截 |
 
 **格式说明**：状态三档语义见 knowledge-capture SKILL.md 写作规范节（单一权威，此处不自建副本）。「源材料」为 provenance 回指入口，完整判例链见各 skill 的「先例引用」节与 references/。
 
